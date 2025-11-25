@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seattle Weather AI – COM6033 Project</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #222;
+        }
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 520px;
+            width: 100%;
+            background: #ffffff;
+            padding: 24px 28px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px 10px;
+            margin-top: 4px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        input[type="number"]:focus {
+            border-color: #007acc;
+            box-shadow: 0 0 0 1px rgba(0,122,204,0.25);
+        }
+        .hint {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        .btn {
+            margin-top: 18px;
+            width: 100%;
+            padding: 10px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #005f99;
+        }
+        .result {
+            margin-top: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            background: #e6f4ea;
+        }
+        .error {
+            margin-top: 16px;
+            color: #b00020;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            background: #fdecea;
+        }
+        .footer {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="container">
+        <h1>Seattle Weather Prediction</h1>
+        <p class="subtitle">
+            Predict the daily weather in Seattle based on real data.<br>
+            
+        </p>
+
+        <form method="POST">
+            <label for="precipitation">Precipitation (mm)</label>
+            <input type="number" id="precipitation" name="precipitation" step="0.1" required>
+            <div class="hint">Example: 0.0 for dry, 5.0 for light rain.</div>
+
+            <label for="temp_max">Max Temperature (°C)</label>
+            <input type="number" id="temp_max" name="temp_max" step="0.1" required>
+
+            <label for="temp_min">Min Temperature (°C)</label>
+            <input type="number" id="temp_min" name="temp_min" step="0.1" required>
+
+            <label for="wind">Wind Speed (m/s)</label>
+            <input type="number" id="wind" name="wind" step="0.1" required>
+
+            <button type="submit" class="btn">Predict Weather</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">{{ prediction }}</div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+    </div>
+</div>
+</body>
+</html>
